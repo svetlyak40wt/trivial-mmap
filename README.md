@@ -26,9 +26,9 @@ from a file containing Twitter social graph (780 MB uncompressed).
 
 ````lisp
 CL-USER> (time
-          (trivial-mmap:with-mmap-file (ptr size "/home/zodmaner/twitter_rv_15066953.net")
-            (loop :for offset :below size :do
-              (assert (characterp (trivial-mmap:mmap-read-char ptr offset))))))
+          (trivial-mmap:with-mmap-file (file "/home/zodmaner/twitter_rv_15066953.net")
+            (loop :for offset :below (trivial-mmap::mmapped-file-size file) :do
+              (assert (characterp (trivial-mmap:mmap-read-char file))))))
 Evaluation took:
   3.400 seconds of real time
   3.400000 seconds of total run time (3.360000 user, 0.040000 system)
